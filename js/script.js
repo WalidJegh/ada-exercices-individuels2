@@ -1,23 +1,38 @@
 function askNumber() {
-  return prompt("Donner moi un nombre s'il vous plaît");
+  let answer = prompt(
+    "Donner moi un nombre compris entre 0 et 50 s'il vous plaît"
+  );
+  if (answer < 0 || answer > 50) {
+    askNumber();
+  } else {
+    return answer;
+  }
 }
 
-function didIWin(givenNumber) {
-  if (parseInt(givenNumber) === 22) {
-    alert("Bravo ! Vous avez deviné le nombre");
+let givenNumber = askNumber();
+
+function askTheNumber() {
+  return prompt("Devinez le nombre compris entre 0 et 50");
+}
+
+function didIWin(givenNumber, playerTwo) {
+  if (playerTwo === givenNumber) {
+    alert("Bravo ! vous avez deviné le nombre");
     return true;
-  } else if (givenNumber < 22) {
+  }
+  if (playerTwo < givenNumber) {
     alert("Plus grand");
     return false;
-  } else if (givenNumber > 22) {
+  }
+  if (playerTwo > givenNumber) {
     alert("Plus petit");
     return false;
   }
 }
 
 function gamePlay() {
-  let givenNumber = askNumber();
-  if (didIWin(givenNumber) === false) {
+  let playerTwo = askTheNumber();
+  if (didIWin(givenNumber, playerTwo) === false) {
     gamePlay();
   }
 }
